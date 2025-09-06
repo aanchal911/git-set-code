@@ -350,160 +350,26 @@
       line-height: 1.4;
     }
 
-    /* Responsive Design */
+    /* Responsive Design - Same Layout, Scaled Down */
     @media (max-width: 768px) {
-      .game-map {
-        padding: 20px;
+      body {
+        zoom: 0.7;
       }
-
-      .squid-game-logo {
-        top: 20px;
-        left: 20px;
-        transform: none;
-      }
-
-      .squid-game-logo img {
-        width: 120px;
-      }
-
-      .second-image {
-        top: 20px;
-        left: 160px;
-        transform: none;
-      }
-
-      .second-image img {
-        width: 100px;
-      }
-
-      .center-animation {
-        top: 180px;
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-      }
-
-      .center-animation img {
-        width: 200px !important;
-        height: auto !important;
-      }
-
-      .title-text {
-        font-size: 2.5rem;
-      }
-
-      .year-text {
-        font-size: 1.8rem;
-      }
-
-      .squid-symbols {
-        font-size: 2rem;
-      }
-
-      .corner-accents {
-        width: 50px;
-        height: 50px;
-      }
-
-      .corner-tl, .corner-tr { top: 15px; }
-      .corner-bl, .corner-br { bottom: 15px; }
-      .corner-tl, .corner-bl { left: 15px; }
-      .corner-tr, .corner-br { right: 15px; }
-
-      .level {
-        width: 60px;
-        height: 60px;
-      }
-
-      .level-number {
-        font-size: 1.5rem;
-      }
-
-      .level1 { top: 400px; left: 50px; }
-      .level2 { top: 350px; left: 150px; }
-      .level3 { top: 420px; left: 250px; }
-      .level4 { top: 500px; left: 200px; }
-      .level5 { top: 580px; left: 100px; }
-      .level6 { top: 650px; left: 200px; }
-      .level7 { top: 720px; left: 120px; }
-      .level8 { top: 790px; left: 180px; }
-
-      .snake-path {
-        display: none;
-      }
-
+      
       .tooltip {
-        max-width: 280px;
-        font-size: 0.9rem;
-        padding: 15px;
-      }
-
-      .tooltip h3 {
-        font-size: 1rem;
+        zoom: 1.4;
+        max-width: 300px;
       }
     }
 
     @media (max-width: 480px) {
-      .squid-game-logo img {
-        width: 80px;
+      body {
+        zoom: 0.5;
       }
-
-      .second-image {
-        left: 110px;
-      }
-
-      .second-image img {
-        width: 70px;
-      }
-
-      .center-animation {
-        top: 160px;
-      }
-
-      .center-animation img {
-        width: 150px !important;
-      }
-
-      .title-text {
-        font-size: 2rem;
-      }
-
-      .year-text {
-        font-size: 1.5rem;
-      }
-
-      .level {
-        width: 50px;
-        height: 50px;
-      }
-
-      .level-number {
-        font-size: 1.2rem;
-      }
-
-      .level1 { top: 350px; left: 30px; }
-      .level2 { top: 310px; left: 100px; }
-      .level3 { top: 370px; left: 170px; }
-      .level4 { top: 430px; left: 130px; }
-      .level5 { top: 490px; left: 60px; }
-      .level6 { top: 550px; left: 130px; }
-      .level7 { top: 610px; left: 80px; }
-      .level8 { top: 670px; left: 120px; }
-
+      
       .tooltip {
-        max-width: 250px;
-        font-size: 0.8rem;
-        padding: 12px;
-      }
-
-      .squid-symbols {
-        font-size: 1.5rem;
-      }
-
-      .corner-accents {
-        width: 40px;
-        height: 40px;
+        zoom: 2;
+        max-width: 280px;
       }
     }
 
@@ -655,23 +521,13 @@
         
         const rect = e.target.getBoundingClientRect();
         
-        // Responsive tooltip positioning
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-          tooltip.style.left = '50%';
-          tooltip.style.transform = 'translateX(-50%)';
-          tooltip.style.top = rect.bottom + 10 + 'px';
+        // Special positioning for levels 7 and 8 to show tooltip above
+        if (levelNum === '7' || levelNum === '8') {
+          tooltip.style.left = rect.left + rect.width + 20 + 'px';
+          tooltip.style.top = rect.top - 150 + 'px';
         } else {
-          // Special positioning for levels 7 and 8 to show tooltip above
-          if (levelNum === '7' || levelNum === '8') {
-            tooltip.style.left = rect.left + rect.width + 20 + 'px';
-            tooltip.style.top = rect.top - 150 + 'px';
-          } else {
-            tooltip.style.left = rect.left + rect.width + 20 + 'px';
-            tooltip.style.top = rect.top - 20 + 'px';
-          }
-          tooltip.style.transform = 'none';
+          tooltip.style.left = rect.left + rect.width + 20 + 'px';
+          tooltip.style.top = rect.top - 20 + 'px';
         }
         
         tooltip.classList.add('show');
